@@ -72,6 +72,17 @@ The pipeline is defined in `.github/workflows/dotnet-tests.yml` and runs on ever
 Artifacts (test results and HTML reports) are available for download in the Actions run summary.
 
 ---
+## Manually Running the CI/CD Pipeline
+
+You can manually trigger the GitHub Actions pipeline from the GitHub UI:
+
+1. Navigate to the **Actions** tab in your repository.
+2. Select the **.NET Test Automation CI** workflow from the left sidebar.
+3. Click the **"Run workflow"** button.
+4. Optionally, specify any input parameters (if defined).
+5. Click **"Run workflow"** to start the pipeline manually.
+
+This is useful for ad-hoc test runs, verifying changes before pushing, or rerunning tests after updating dependencies.
 
 ## Contributing
 
