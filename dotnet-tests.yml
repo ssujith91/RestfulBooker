@@ -1,7 +1,7 @@
 name: .NET Test Automation CI
 
 on:
-  workflow_dispatch: # Allows manual trigger
+  workflow_dispatch:
   push:
     branches: [ main, master ]
   pull_request:
@@ -10,7 +10,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,27 +26,25 @@ jobs:
         run: dotnet build --no-restore --configuration Release
 
       - name: Run tests and generate TRX report
-        run: |
-          mkdir -p TestResults
-          dotnet test --no-build --logger "trx;LogFileName=test_results.trx" --results-directory ./TestResults
-        continue-on-error: true  # <-- IMPORTANT: don't stop workflow if tests fail
+        run: dotnet test --no-build --logger "trx;LogFileName=test_results.trx" --results-directory ./TestResults
+        continue-on-error: true
 
       - name: Publish TRX Test Results
         uses: actions/upload-artifact@v4
         with:
           name: trx-test-results
           path: ./TestResults/test_results.trx
+        if: always() # This ensures the artifact is always uploaded, even if the tests fail
 
       - name: Install ReportGenerator and Generate HTML Report
         run: |
           dotnet tool install --global dotnet-reportgenerator-globaltool
-          reportgenerator \
-            "-reports:./TestResults/test_results.trx" \
-            "-targetdir:./TestResults/Report" \
-            "-reporttypes:HtmlInline_AzurePipelines"
+          reportgenerator "-reports:./TestResults/test_results.trx" "-targetdir:./TestResults/Report" "-reporttypes:Html"
+        if: always() # This ensures the report is always generated, even if the tests fail
 
       - name: Upload HTML Test Report
         uses: actions/upload-artifact@v4
         with:
           name: html-test-report
           path: ./TestResults/Report
+        if: always() # This ensures the report is always uploaded, even if the tests fail
