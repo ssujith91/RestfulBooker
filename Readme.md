@@ -84,6 +84,10 @@ You can manually trigger the GitHub Actions pipeline from the GitHub UI:
 
 This is useful for ad-hoc test runs, verifying changes before pushing, or rerunning tests after updating dependencies.
 
+## Note on Test Failures
+
+Some automated tests may fail because the Restful Booker API does not generate the expected responses for specific scenarios. These failures are primarily due to issues or faulty behavior in the API endpoints, not the test automation implementation. For transparency, comments have been added directly to the relevant scenarios in the feature files to indicate where SpecFlow tests fail due to unexpected API responses.
+
 ## Contributing
 
 - Fork the repository and submit pull requests.
