@@ -1,11 +1,12 @@
 name: .NET Test Automation CI
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-  workflow_dispatch:
+   
 
 jobs:
   build-and-test:
@@ -27,24 +28,26 @@ jobs:
       run: dotnet build --no-restore --configuration Release
 
     - name: Run tests and generate report
-      run: dotnet test --no-build --configuration Release --logger "trx;LogFileName=test_results.trx" --results-directory ./TestResults
+      run: |
+          mkdir -p TestResults
+          dotnet test --no-build --logger "trx;LogFileName=test_results.trx" --results-directory ./TestResults
 
     - name: Publish Test Results
       uses: actions/upload-artifact@v4
-      with:
-        name: TestResults
-        path: ./TestResults
+        with:
+          name: trx-test-results
+          path: ./TestResults/test_results.trx
 
-    - name: Test Report (Optional HTML)
-      if: always()
-      run: |
-        dotnet tool install --global trx2html
-        trx2html ./TestResults/test_results.trx ./TestResults/test_results.html
-      continue-on-error: true
+    - name: Install ReportGenerator and Generate HTML Report
+        run: |
+          dotnet tool install --global dotnet-reportgenerator-globaltool
+          reportgenerator \
+            "-reports:./TestResults/test_results.trx" \
+            "-targetdir:./TestResults/Report" \
+            "-reporttypes:Html"
 
     - name: Upload HTML Test Report
-      if: always()
       uses: actions/upload-artifact@v4
-      with:
-        name: TestReportHTML
-        path: ./TestResults/test_results.html
+        with:
+          name: html-test-report
+          path: ./TestResults/Report
