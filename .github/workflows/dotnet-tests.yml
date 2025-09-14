@@ -26,7 +26,7 @@ jobs:
         run: dotnet build --no-restore --configuration Release
 
       - name: Run tests and generate TRX report
-        run: dotnet test --no-build --logger "trx;LogFileName=test_results.trx" --results-directory ./TestResults
+        run: dotnet test --no-build --configuration Release --logger "trx;LogFileName=test_results.trx" --results-directory ./TestResults
         continue-on-error: true # Ensure workflow continues even if tests fail
 
       - name: Install ReportGenerator and Generate HTML Report
@@ -41,3 +41,4 @@ jobs:
           name: html-test-report
           path: ./TestResults/Report
         if: always() # This ensures the report is uploaded regardless of test outcome
+
