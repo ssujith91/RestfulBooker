@@ -1,0 +1,11 @@
+{
+  "firstname": "MultiUser",
+  "lastname": "MultiTest",
+  "totalprice": 200,
+  "depositpaid": false,
+  "bookingdates": {
+    "checkin": "2025-02-01",
+    "checkout": "2025-02-10"
+  },
+  "additionalneeds": "Breakfast"
+}

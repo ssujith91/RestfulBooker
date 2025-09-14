@@ -1,0 +1,16 @@
+{
+  "language": {
+    "feature": "en-us"
+  },
+  "bindingCulture": {
+    "name": "en-us"
+  },
+  "runtime": {
+    "stopAtFirstError": false
+  },
+  "trace": {
+    "traceSuccessfulSteps": true,
+    "traceTimings": true,
+    "minTracedDuration": "0:00:00.100"
+  }
+}

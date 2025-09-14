@@ -1,0 +1,3 @@
+﻿field,value
+firstname,!@#$%^&*()
+lastname,<script>alert('XSS')</script>

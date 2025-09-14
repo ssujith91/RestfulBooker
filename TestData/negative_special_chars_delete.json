@@ -1,0 +1,5 @@
+{
+  "bookingid": 12345,
+  "firstname": "!@#$%^&*()_+",
+  "lastname": "<script>alert('XSS')</script>"
+}

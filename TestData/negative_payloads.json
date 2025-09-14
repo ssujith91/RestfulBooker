@@ -1,0 +1,18 @@
+[
+  {
+    "description": "Empty request",
+    "payload": {}
+  },
+  {
+    "description": "Malformed JSON",
+    "payload": "{ 'invalid': true"
+  },
+  {
+    "description": "SQL Injection",
+    "filters": { "firstname": "' OR 1=1; --" }
+  },
+  {
+    "description": "Special Characters",
+    "filters": { "firstname": "!@#$%^&*()" }
+  }
+]

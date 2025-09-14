@@ -1,0 +1,22 @@
+[
+    {
+      "firstname": "TestUser",
+      "lastname": "One",
+      "totalprice": 150,
+      "depositpaid": true,
+      "bookingdates": {
+        "checkin": "2025-09-05",
+        "checkout": "2025-09-10"
+      }
+    },
+    {
+      "firstname": "TestUser",
+      "lastname": "Two",
+      "totalprice": 200,
+      "depositpaid": false,
+      "bookingdates": {
+        "checkin": "2025-09-06",
+        "checkout": "2025-09-12"
+      }
+    }
+]
